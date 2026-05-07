@@ -13,12 +13,22 @@ export interface Question {
   }
 }
 
+const shuffleArray = <T>(array: T[]): T[] => {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
 export interface TestState {
   step: 'form' | 'testing' | 'results'
   currentQuestion: number
   userName: string
   answers: Record<number, Temperament>
   scores: Record<Temperament, number>
+  shuffledQuestions: Question[]
   
   setUserName: (name: string) => void
   setAnswer: (questionId: number, temperament: Temperament) => void
@@ -144,8 +154,9 @@ export const useTestStore = create<TestState>((set, get) => ({
   userName: '',
   answers: {},
   scores: { ...initialScores },
+  shuffledQuestions: [],
   
-  setUserName: (name) => set({ userName: name, step: 'testing' }),
+  setUserName: (name) => set({ userName: name, step: 'testing', shuffledQuestions: shuffleArray(questions) }),
   
   setAnswer: (questionId, temperament) => {
     const { answers, scores } = get()
@@ -162,9 +173,10 @@ export const useTestStore = create<TestState>((set, get) => ({
     set({ answers: newAnswers, scores: newScores })
   },
   
-  nextQuestion: () => set((state) => ({
-    currentQuestion: Math.min(state.currentQuestion + 1, questions.length - 1)
-  })),
+  nextQuestion: () => set((state) => {
+    const total = state.shuffledQuestions.length > 0 ? state.shuffledQuestions.length : questions.length
+    return { currentQuestion: Math.min(state.currentQuestion + 1, total - 1) }
+  }),
   
   prevQuestion: () => set((state) => ({
     currentQuestion: Math.max(state.currentQuestion - 1, 0)
@@ -177,7 +189,8 @@ export const useTestStore = create<TestState>((set, get) => ({
     currentQuestion: 0,
     userName: '',
     answers: {},
-    scores: { ...initialScores }
+    scores: { ...initialScores },
+    shuffledQuestions: []
   })
 }))
 

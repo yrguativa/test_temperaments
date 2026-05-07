@@ -7,20 +7,31 @@
   --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-  --primary: 262.1 83.3% 57.8%;
-  --primary-foreground: 210 40% 98%;
+  --primary: 210 100% 40%;
+  --primary-foreground: 0 0% 100%;
   --secondary: 210 40% 96.1%;
   --secondary-foreground: 222.2 47.4% 11.2%;
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  --accent: 160 100% 40%;
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 262.1 83.3% 57.8%;
+  --ring: 210 100% 40%;
   --radius: 0.5rem;
+
+  /* Colores principales */
+  --color-azul-principal: #0077cc;
+  --color-verde-acento: #00cc66;
+  --color-blanco-texto: #ffffff;
+  --color-gris-oscuro: #333333;
+
+  /* Fuentes principales */
+  --font-titulos: 'Montserrat', sans-serif;
+  --font-subtitulos: 'Poppins', sans-serif;
+  --font-texto: 'Open Sans', sans-serif;
 }
 
 @theme inline {
@@ -30,28 +41,30 @@
   --color-card-foreground: hsl(var(--card-foreground));
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary: var(--color-azul-principal);
+  --color-primary-foreground: var(--color-blanco-texto);
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent: var(--color-verde-acento);
+  --color-accent-foreground: var(--color-blanco-texto);
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
+  --color-ring: var(--color-azul-principal);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-texto);
+  --font-titulos: var(--font-titulos);
+  --font-subtitulos: var(--font-subtitulos);
+  --font-texto: var(--font-texto);
 }
 
 body {
   background: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-gris-oscuro);
+  font-family: var(--font-texto);
 }

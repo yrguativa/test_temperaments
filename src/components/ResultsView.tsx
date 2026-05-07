@@ -1,10 +1,10 @@
 "use client"
 
-import { useTestStore, Temperament, questions } from "@/store/testStore"
+import { useTestStore, Temperament } from "@/store/testStore"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts"
-import { RotateCcw, Home, Award } from "lucide-react"
+import { RotateCcw, Award } from "lucide-react"
 
 export function ResultsView() {
   const { scores, userName, resetTest } = useTestStore()
@@ -19,10 +19,10 @@ export function ResultsView() {
   }
 
   const chartData = [
-    { name: "Sanguíneo", value: scores.sanguineo, percentage: percentages.sanguineo, fill: "#ef4444" },
-    { name: "Colérico", value: scores.colerico, percentage: percentages.colerico, fill: "#eab308" },
-    { name: "Melancólico", value: scores.melancolico, percentage: percentages.melancolico, fill: "#3b82f6" },
-    { name: "Flemático", value: scores.flematico, percentage: percentages.flematico, fill: "#22c55e" }
+    { name: "Sanguíneo", value: scores.sanguineo, percentage: percentages.sanguineo, fill: "#0077cc" },
+    { name: "Colérico", value: scores.colerico, percentage: percentages.colerico, fill: "#00aaff" },
+    { name: "Melancólico", value: scores.melancolico, percentage: percentages.melancolico, fill: "#0055aa" },
+    { name: "Flemático", value: scores.flematico, percentage: percentages.flematico, fill: "#00cc66" }
   ].sort((a, b) => b.value - a.value)
 
   const primary = chartData[0]
@@ -87,17 +87,17 @@ export function ResultsView() {
   const combination = combinations[comboKey] || { title: primary.name, description: targetDesc?.description || "" }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-4">
       <div className="max-w-3xl mx-auto space-y-6">
         <Card className="shadow-xl">
           <CardHeader className="text-center">
-            <div className="mx-auto w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <div className="mx-auto w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4">
               <span className="text-4xl">🎯</span>
             </div>
-            <CardTitle className="text-2xl text-purple-900">
+            <CardTitle className="text-2xl text-blue-900 font-titulos">
               ¡Resultados de {userName}!
             </CardTitle>
-            <CardDescription className="text-lg">
+            <CardDescription className="text-lg font-subtitulos">
               Tu temperamento predominante es <span className="font-bold">{primary.name}</span>
             </CardDescription>
           </CardHeader>
@@ -105,7 +105,7 @@ export function ResultsView() {
 
         <Card className="shadow-xl">
           <CardHeader>
-            <CardTitle className="text-xl">Porcentajes por Columna</CardTitle>
+            <CardTitle className="text-xl font-titulos">Porcentajes por Columna</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -130,13 +130,13 @@ export function ResultsView() {
 
         <Card className="shadow-xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 font-titulos">
               <Award className="w-5 h-5" />
               Tu Perfil: {combination.title}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-700 leading-relaxed">{combination.description}</p>
+            <p className="text-gray-700 leading-relaxed font-texto">{combination.description}</p>
             <div className="mt-4 grid grid-cols-2 gap-3">
               {chartData.map((item) => (
                 <div
@@ -144,7 +144,7 @@ export function ResultsView() {
                   className="flex items-center justify-between p-3 rounded-lg"
                   style={{ backgroundColor: `${item.fill}15` }}
                 >
-                  <span className="font-medium">{item.name}</span>
+                  <span className="font-medium font-subtitulos">{item.name}</span>
                   <span className="font-bold" style={{ color: item.fill }}>
                     {item.percentage}%
                   </span>
@@ -158,7 +158,7 @@ export function ResultsView() {
           <Button
             onClick={resetTest}
             variant="outline"
-            className="flex-1 py-6"
+            className="flex-1 py-6 font-subtitulos"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
             Repetir Test
