@@ -1,13 +1,14 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
+import { toPng } from "html-to-image"
 import { useNewTestStore, Temperament, TemperamentOption } from "@/store/newTestStore"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts"
-import { RotateCcw, Sparkles } from "lucide-react"
+import { RotateCcw, Sparkles, Share2 } from "lucide-react"
 
 const shuffleArray = <T,>(array: T[]): T[] => {
   const shuffled = [...array]
@@ -44,6 +45,29 @@ const temperamentEmojis: Record<Temperament, string> = {
   Colerico: "🔥",
   Melancolico: "🎭",
   Flematico: "🌿"
+}
+
+const temperamentTraits: Record<Temperament, { fortalezas: string[]; debilidades: string[]; parrafo: string }> = {
+  Sangineo: {
+    fortalezas: ["Sociable", "Entusiasta", "Compasivo", "Comunicativo", "Alegre", "Amigable"],
+    debilidades: ["Voluntad débil", "Indisciplinado", "Inestable emocional", "Egocéntrico", "Exagerado"],
+    parrafo: "Los sanguíneos son personas cálidas, entusiastas y llenas de vida. Disfrutan estar rodeados de gente, son comunicativos naturales y contagian su alegría a los demás. Su compasión los lleva a ayudar y su optimismo los hace ver siempre el lado bueno. Sin embargo, su voluntad débil los hace propensos a la indisciplina y la inconstancia. Su inestabilidad emocional y tendencia a exagerar pueden generar conflictos, y su necesidad de atención los vuelve egocéntricos si no se controlan."
+  },
+  Colerico: {
+    fortalezas: ["Decidido", "Líder nato", "Optimista", "Práctico", "Productivo", "Audaz"],
+    debilidades: ["Orgulloso", "Iracundo", "Insensible", "Autosuficiente", "Dominante"],
+    parrafo: "Los coléricos son líderes natos: decididos, prácticos y productivos. Su optimismo los impulsa a lograr grandes metas y su audacia los hace enfrentar desafíos que otros evitarían. Son personas de acción que inspiran a seguirles. Pero su orgullo y autosuficiencia los lleva a creer que no necesitan ayuda. Su ira y falta de sensibilidad hieren a quienes los rodean, y su tendencia dominante puede sofocar a los demás si no aprenden a controlar su carácter."
+  },
+  Melancolico: {
+    fortalezas: ["Analítico", "Abnegado", "Talentoso", "Perfeccionista", "Leal", "Sensible"],
+    debilidades: ["Deprimido", "Negativo", "Pesimista", "Crítico", "Vengativo", "Introvertido"],
+    parrafo: "Los melancólicos poseen una mente analítica y profunda, son talentosos y perfeccionistas en todo lo que hacen. Su lealtad es inquebrantable y su sensibilidad los hace captar matices que otros pasan por alto. Son abnegados y sacrificados por quienes aman. No obstante, su tendencia a la depresión y el negativismo nubla su perspectiva. El perfeccionismo extremo los vuelve críticos y difíciles de complacer, y su inclinación al rencor y al aislamiento los lleva a la soledad si no se entregan a Dios."
+  },
+  Flematico: {
+    fortalezas: ["Calmado", "Confiable", "Eficiente", "Práctico", "Diplomático", "Humor seco"],
+    debilidades: ["Tímido", "Indeciso", "Temeroso", "Evasivo", "Desmotivado"],
+    parrafo: "Los flemáticos son personas tranquilas, confiables y eficientes. Su diplomacia y humor seco los hacen agradables en cualquier grupo, y su naturaleza práctica resuelve problemas sin estridencias. Son leales y consistentes, manteniendo la calma bajo presión. Sin embargo, su timidez y temor al conflicto los vuelve indecisos y evasivos. Su tendencia a la desmotivación los hace parecer desinteresados, y prefieren evitar compromisos antes de enfrentar situaciones incómodas."
+  }
 }
 
 const descriptions: Record<string, { title: string; description: string }> = {
@@ -248,6 +272,37 @@ function QuestionView() {
 
 function ResultsView() {
   const { scores, userName, resetTest } = useNewTestStore()
+  const resultsRef = useRef<HTMLDivElement>(null)
+  const [capturing, setCapturing] = useState(false)
+
+  const handleShare = useCallback(async () => {
+    const el = resultsRef.current
+    if (!el) return
+    setCapturing(true)
+    try {
+      const originalHeight = el.style.height
+      const originalOverflow = el.style.overflow
+      el.style.height = `${el.scrollHeight}px`
+      el.style.overflow = "visible"
+      await new Promise((r) => setTimeout(r, 300))
+      const dataUrl = await toPng(el, {
+        quality: 1,
+        pixelRatio: 2,
+        width: el.scrollWidth,
+        height: el.scrollHeight,
+        cacheBust: true,
+      })
+      el.style.height = originalHeight
+      el.style.overflow = originalOverflow
+      const link = document.createElement("a")
+      link.download = `test-temperamentos-${userName}.png`
+      link.href = dataUrl
+      link.click()
+    } catch {
+      // fallback silencioso
+    }
+    setCapturing(false)
+  }, [userName])
 
   const totalAnswers = Object.values(scores).reduce((a, b) => a + b, 0) || 1
 
@@ -282,6 +337,7 @@ function ResultsView() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50 p-4">
       <div className="max-w-3xl mx-auto space-y-6">
+        <div ref={resultsRef} className="space-y-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50 p-4 rounded-2xl">
         <div className="animate-[fade-in_0.6s_ease-out]">
           <Card className="shadow-2xl border-0 overflow-hidden">
             <div className="h-2 bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400" />
@@ -305,6 +361,59 @@ function ResultsView() {
         </div>
 
         <div className="animate-[fade-in_0.6s_ease-out_0.2s_both]">
+          <Card className="shadow-2xl border-0 overflow-hidden">
+            <div className="h-1.5 bg-gradient-to-r from-purple-400 to-pink-400" />
+            <CardHeader>
+              <h2 className="flex items-center gap-2 font-titulos text-xl">
+                <Sparkles className="w-5 h-5 text-yellow-500" />
+                <span className="bg-gradient-to-r from-purple-700 to-pink-600 bg-clip-text text-transparent">
+                  Fortalezas y Debilidades — Basado en Tim LaHaye
+                </span>
+              </h2>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-6">
+                {([primaryKey, secondaryKey] as Temperament[]).map((key) => {
+                  const traits = temperamentTraits[key]
+                  const label = temperamentLabels[key]
+                  return (
+                    <div key={key} className="space-y-3">
+                      <h3 className="font-bold font-subtitulos text-lg flex items-center gap-2">
+                        <span>{temperamentEmojis[key]}</span>
+                        <span style={{ color: temperamentColors[key] }}>{label}</span>
+                      </h3>
+                      <p className="text-gray-700 font-texto text-sm leading-relaxed">
+                        {traits.parrafo}
+                      </p>
+                      <div>
+                        <p className="text-xs font-semibold text-green-600 uppercase tracking-wider mb-1.5">Fortalezas</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {traits.fortalezas.map((f) => (
+                            <span key={f} className="text-xs px-2 py-1 rounded-full bg-green-50 text-green-700 border border-green-200">
+                              {f}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-red-600 uppercase tracking-wider mb-1.5">Debilidades</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {traits.debilidades.map((d) => (
+                            <span key={d} className="text-xs px-2 py-1 rounded-full bg-red-50 text-red-700 border border-red-200">
+                              {d}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="animate-[fade-in_0.6s_ease-out_0.4s_both]">
           <Card className="shadow-2xl border-0 overflow-hidden">
             <div className="h-1.5 bg-gradient-to-r from-blue-400 to-cyan-400" />
             <CardHeader>
@@ -335,7 +444,7 @@ function ResultsView() {
           </Card>
         </div>
 
-        <div className="animate-[fade-in_0.6s_ease-out_0.4s_both]">
+        <div className="animate-[fade-in_0.6s_ease-out_0.5s_both]">
           <Card className="shadow-2xl border-0 overflow-hidden">
             <div className="h-1.5 bg-gradient-to-r from-emerald-400 to-teal-400" />
             <CardHeader>
@@ -369,7 +478,17 @@ function ResultsView() {
           </Card>
         </div>
 
+      </div>
+
         <div className="flex gap-4 pb-8 animate-[fade-in_0.6s_ease-out_0.6s_both]">
+          <Button
+            onClick={handleShare}
+            disabled={capturing}
+            className="flex-1 py-6 font-subtitulos bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60"
+          >
+            <Share2 className="w-4 h-4 mr-2" />
+            {capturing ? "Generando..." : "Compartir"}
+          </Button>
           <Button
             onClick={resetTest}
             variant="outline"
