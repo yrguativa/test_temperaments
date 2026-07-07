@@ -1,0 +1,802 @@
+[
+  {
+    "num": 1,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Animado",
+      "desc": "Desbordas alegría"
+    },
+    "Colerico": {
+      "titulo": "Aventurero",
+      "desc": "Buscas nuevas metas"
+    },
+    "Melancolico": {
+      "titulo": "Analítico",
+      "desc": "Analizas todo en detalle"
+    },
+    "Flematico": {
+      "titulo": "Adaptable",
+      "desc": "Te ajustas con facilidad"
+    }
+  },
+  {
+    "num": 2,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Juguetón",
+      "desc": "Transmites diversión"
+    },
+    "Colerico": {
+      "titulo": "Persuasivo",
+      "desc": "Persuades con firmeza"
+    },
+    "Melancolico": {
+      "titulo": "Persistente",
+      "desc": "Persistes hasta el final"
+    },
+    "Flematico": {
+      "titulo": "Sereno",
+      "desc": "Mantienes la calma"
+    }
+  },
+  {
+    "num": 3,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Sociable",
+      "desc": "Disfrutas conocer gente"
+    },
+    "Colerico": {
+      "titulo": "Decidido",
+      "desc": "Tomas decisiones rápidas"
+    },
+    "Melancolico": {
+      "titulo": "Abnegado",
+      "desc": "Te entregas por completo"
+    },
+    "Flematico": {
+      "titulo": "Sumiso",
+      "desc": "Aceptas sin resistencia"
+    }
+  },
+  {
+    "num": 4,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Convincente",
+      "desc": "Convences con facilidad"
+    },
+    "Colerico": {
+      "titulo": "Competitivo",
+      "desc": "Necesitas ganar"
+    },
+    "Melancolico": {
+      "titulo": "Considerado",
+      "desc": "Eres reflexivo y justo"
+    },
+    "Flematico": {
+      "titulo": "Controlado",
+      "desc": "Te controlas en todo"
+    }
+  },
+  {
+    "num": 5,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Alentador",
+      "desc": "Motivas a los demás"
+    },
+    "Colerico": {
+      "titulo": "Inventivo",
+      "desc": "Creas soluciones únicas"
+    },
+    "Melancolico": {
+      "titulo": "Respetuoso",
+      "desc": "Valoras a los demás"
+    },
+    "Flematico": {
+      "titulo": "Reservado",
+      "desc": "Eres prudente al hablar"
+    }
+  },
+  {
+    "num": 6,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Vivaz",
+      "desc": "Irradias entusiasmo"
+    },
+    "Colerico": {
+      "titulo": "Autosuficiente",
+      "desc": "Confías en ti mismo"
+    },
+    "Melancolico": {
+      "titulo": "Sensible",
+      "desc": "Captas lo sutil"
+    },
+    "Flematico": {
+      "titulo": "Tranquilo",
+      "desc": "Actúas sin prisas"
+    }
+  },
+  {
+    "num": 7,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Promotor",
+      "desc": "Promueves ideas nuevas"
+    },
+    "Colerico": {
+      "titulo": "Positivo",
+      "desc": "Transmitas optimismo"
+    },
+    "Melancolico": {
+      "titulo": "Planificador",
+      "desc": "Planificas cada paso"
+    },
+    "Flematico": {
+      "titulo": "Paciente",
+      "desc": "Esperas con paciencia"
+    }
+  },
+  {
+    "num": 8,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Espontáneo",
+      "desc": "Actúas sin pensarlo"
+    },
+    "Colerico": {
+      "titulo": "Seguro",
+      "desc": "Actúas con certeza"
+    },
+    "Melancolico": {
+      "titulo": "Sigue un horario",
+      "desc": "Sigues estructuras claras"
+    },
+    "Flematico": {
+      "titulo": "Tímido",
+      "desc": "Eres reservado y modesto"
+    }
+  },
+  {
+    "num": 9,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Optimista",
+      "desc": "Ves el lado bueno"
+    },
+    "Colerico": {
+      "titulo": "Franco",
+      "desc": "Hablas con honestidad"
+    },
+    "Melancolico": {
+      "titulo": "Ordenado",
+      "desc": "Ordenas tu entorno"
+    },
+    "Flematico": {
+      "titulo": "Complaciente",
+      "desc": "Agradas sin esfuerzo"
+    }
+  },
+  {
+    "num": 10,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Humorístico",
+      "desc": "Haces reír a todos"
+    },
+    "Colerico": {
+      "titulo": "Dominante",
+      "desc": "Tomas el control"
+    },
+    "Melancolico": {
+      "titulo": "Fiel",
+      "desc": "Eres leal y constante"
+    },
+    "Flematico": {
+      "titulo": "Amigable",
+      "desc": "Eres amable y cercano"
+    }
+  },
+  {
+    "num": 11,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Encantador",
+      "desc": "Encantas naturalmente"
+    },
+    "Colerico": {
+      "titulo": "Osado",
+      "desc": "Te atreves a todo"
+    },
+    "Melancolico": {
+      "titulo": "Detallista",
+      "desc": "Notas cada detalle"
+    },
+    "Flematico": {
+      "titulo": "Diplomático",
+      "desc": "Negocias con tacto"
+    }
+  },
+  {
+    "num": 12,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Alegre",
+      "desc": "Transmites felicidad"
+    },
+    "Colerico": {
+      "titulo": "Confiado",
+      "desc": "Transmites seguridad"
+    },
+    "Melancolico": {
+      "titulo": "Culto",
+      "desc": "Buscas conocimiento"
+    },
+    "Flematico": {
+      "titulo": "Constante",
+      "desc": "Eres estable y firme"
+    }
+  },
+  {
+    "num": 13,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Inspirador",
+      "desc": "Inspiras con pasión"
+    },
+    "Colerico": {
+      "titulo": "Independiente",
+      "desc": "Actúas por tu cuenta"
+    },
+    "Melancolico": {
+      "titulo": "Idealista",
+      "desc": "Persigues ideales altos"
+    },
+    "Flematico": {
+      "titulo": "Inofensivo",
+      "desc": "No buscas conflictos"
+    }
+  },
+  {
+    "num": 14,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Cálido",
+      "desc": "Brindas calidez"
+    },
+    "Colerico": {
+      "titulo": "Decisivo",
+      "desc": "Decides sin dudar"
+    },
+    "Melancolico": {
+      "titulo": "Introspectivo",
+      "desc": "Miras hacia adentro"
+    },
+    "Flematico": {
+      "titulo": "Humor seco",
+      "desc": "Tienes humor sutil"
+    }
+  },
+  {
+    "num": 15,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Tratable",
+      "desc": "Eres fácil de tratar"
+    },
+    "Colerico": {
+      "titulo": "Influenciador",
+      "desc": "Influencias a otros"
+    },
+    "Melancolico": {
+      "titulo": "Sensible al arte",
+      "desc": "Aprecias la belleza"
+    },
+    "Flematico": {
+      "titulo": "Conciliador",
+      "desc": "Buscas armonía"
+    }
+  },
+  {
+    "num": 16,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Conversador",
+      "desc": "Disfrutas conversar"
+    },
+    "Colerico": {
+      "titulo": "Persistente",
+      "desc": "Persigues tus metas"
+    },
+    "Melancolico": {
+      "titulo": "Considerado",
+      "desc": "Eres atento y cortés"
+    },
+    "Flematico": {
+      "titulo": "Tolerante",
+      "desc": "Toleras las diferencias"
+    }
+  },
+  {
+    "num": 17,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Enérgico",
+      "desc": "Actúas con vitalidad"
+    },
+    "Colerico": {
+      "titulo": "Líder",
+      "desc": "Guias al equipo"
+    },
+    "Melancolico": {
+      "titulo": "Leal",
+      "desc": "Eres fiel y honesto"
+    },
+    "Flematico": {
+      "titulo": "Escucha",
+      "desc": "Sabes escuchar"
+    }
+  },
+  {
+    "num": 18,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Adorable",
+      "desc": "Eres naturalmente dulce"
+    },
+    "Colerico": {
+      "titulo": "Jefe",
+      "desc": "Diriges con autoridad"
+    },
+    "Melancolico": {
+      "titulo": "Crea gráficas",
+      "desc": "Creas con método"
+    },
+    "Flematico": {
+      "titulo": "Contento",
+      "desc": "Estás en paz contigo"
+    }
+  },
+  {
+    "num": 19,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Popular",
+      "desc": "Conectas con todos"
+    },
+    "Colerico": {
+      "titulo": "Productivo",
+      "desc": "Eres eficiente y rápido"
+    },
+    "Melancolico": {
+      "titulo": "Perfeccionista",
+      "desc": "Buscas la excelencia"
+    },
+    "Flematico": {
+      "titulo": "Permisivo",
+      "desc": "Permites sin juzgar"
+    }
+  },
+  {
+    "num": 20,
+    "tipo": "Fortaleza",
+    "Sangineo": {
+      "titulo": "Jovial",
+      "desc": "Vives con alegría"
+    },
+    "Colerico": {
+      "titulo": "Atrevido",
+      "desc": "Te lanzas sin miedo"
+    },
+    "Melancolico": {
+      "titulo": "Se comparta bien",
+      "desc": "Actúas con rectitud"
+    },
+    "Flematico": {
+      "titulo": "Equilibrado",
+      "desc": "Buscas el equilibrio"
+    }
+  },
+  {
+    "num": 21,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Estridente",
+      "desc": "Molestas con tu voz"
+    },
+    "Colerico": {
+      "titulo": "Mandón",
+      "desc": "Impones tu voluntad"
+    },
+    "Melancolico": {
+      "titulo": "Penoso",
+      "desc": "Te avergüenzas con facilidad"
+    },
+    "Flematico": {
+      "titulo": "Monótono",
+      "desc": "Resultas aburrido"
+    }
+  },
+  {
+    "num": 22,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Indisciplinado",
+      "desc": "Te falta disciplina"
+    },
+    "Colerico": {
+      "titulo": "Antipático",
+      "desc": "Resultas antipático"
+    },
+    "Melancolico": {
+      "titulo": "Implacable",
+      "desc": "Eras implacable contigo"
+    },
+    "Flematico": {
+      "titulo": "Sin entudiasmo",
+      "desc": "Falta entusiasmo en ti"
+    }
+  },
+  {
+    "num": 23,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Repetidor",
+      "desc": "Repites lo mismo"
+    },
+    "Colerico": {
+      "titulo": "Resistente",
+      "desc": "Te resistes a ceder"
+    },
+    "Melancolico": {
+      "titulo": "Resentido",
+      "desc": "Guardas rencores"
+    },
+    "Flematico": {
+      "titulo": "Sarcástico",
+      "desc": "Usas sarcasmo hiriente"
+    }
+  },
+  {
+    "num": 24,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Olvidadizo",
+      "desc": "Olvidas compromisos"
+    },
+    "Colerico": {
+      "titulo": "Cortante",
+      "desc": "Hieres con palabras"
+    },
+    "Melancolico": {
+      "titulo": "Exigente",
+      "desc": "Exiges demasiado"
+    },
+    "Flematico": {
+      "titulo": "Temeroso",
+      "desc": "Vives con miedo"
+    }
+  },
+  {
+    "num": 25,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Interrumpe",
+      "desc": "Interrumpes conversaciones"
+    },
+    "Colerico": {
+      "titulo": "Impaciente",
+      "desc": "Te falta paciencia"
+    },
+    "Melancolico": {
+      "titulo": "Inseguro",
+      "desc": "Dudas de ti mismo"
+    },
+    "Flematico": {
+      "titulo": "Indeciso",
+      "desc": "No te comprometes"
+    }
+  },
+  {
+    "num": 26,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Imprevisible",
+      "desc": "Actúas sin avisar"
+    },
+    "Colerico": {
+      "titulo": "Frío",
+      "desc": "Actúas con frialdad"
+    },
+    "Melancolico": {
+      "titulo": "Impopular",
+      "desc": "Te sientes poco querido"
+    },
+    "Flematico": {
+      "titulo": "No comprometido",
+      "desc": "Eres indeciso siempre"
+    }
+  },
+  {
+    "num": 27,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Descuidado",
+      "desc": "Descuidas detalles"
+    },
+    "Colerico": {
+      "titulo": "Terco",
+      "desc": "Eres terco y necio"
+    },
+    "Melancolico": {
+      "titulo": "Difícil contentar",
+      "desc": "Nunca estás satisfecho"
+    },
+    "Flematico": {
+      "titulo": "Vacilante",
+      "desc": "Dudas al actuar"
+    }
+  },
+  {
+    "num": 28,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Permisivo",
+      "desc": "Eres demasiado blando"
+    },
+    "Colerico": {
+      "titulo": "Orgulloso",
+      "desc": "Eres excesivamente orgulloso"
+    },
+    "Melancolico": {
+      "titulo": "Pesimista",
+      "desc": "Ves todo negativo"
+    },
+    "Flematico": {
+      "titulo": "Insípido",
+      "desc": "Eres insípido y soso"
+    }
+  },
+  {
+    "num": 29,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Iracundo",
+      "desc": "Explotas con ira"
+    },
+    "Colerico": {
+      "titulo": "Argumentador",
+      "desc": "Discutes sin razón"
+    },
+    "Melancolico": {
+      "titulo": "Callado",
+      "desc": "Te callas en exceso"
+    },
+    "Flematico": {
+      "titulo": "Sin objetivos",
+      "desc": "Vives sin dirección"
+    }
+  },
+  {
+    "num": 30,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Ingenuo",
+      "desc": "Crees todo con facilidad"
+    },
+    "Colerico": {
+      "titulo": "Atrevido",
+      "desc": "Te tomas riesgos tontos"
+    },
+    "Melancolico": {
+      "titulo": "Negativo",
+      "desc": "Ves el lado oscuro"
+    },
+    "Flematico": {
+      "titulo": "Despreocupado",
+      "desc": "Te preocupas sin control"
+    }
+  },
+  {
+    "num": 31,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Quiere el crérdito",
+      "desc": "Buscas reconocimiento"
+    },
+    "Colerico": {
+      "titulo": "Adicto al trabajo",
+      "desc": "Eres adicto al trabajo"
+    },
+    "Melancolico": {
+      "titulo": "Retraído",
+      "desc": "Te aísla de los demás"
+    },
+    "Flematico": {
+      "titulo": "Ansioso",
+      "desc": "Todo te da ansiedad"
+    }
+  },
+  {
+    "num": 32,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Hablador",
+      "desc": "Hablas sin medida"
+    },
+    "Colerico": {
+      "titulo": "Indiscreto",
+      "desc": "Hablas sin discreción"
+    },
+    "Melancolico": {
+      "titulo": "Susceptible",
+      "desc": "Eres muy susceptible"
+    },
+    "Flematico": {
+      "titulo": "Tímido",
+      "desc": "Eres tímido extremo"
+    }
+  },
+  {
+    "num": 33,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Desorganizado",
+      "desc": "Desorganizas tu espacio"
+    },
+    "Colerico": {
+      "titulo": "Dominante",
+      "desc": "Quieres dominar siempre"
+    },
+    "Melancolico": {
+      "titulo": "Deprimido",
+      "desc": "Te sumes en tristeza"
+    },
+    "Flematico": {
+      "titulo": "Dudoso",
+      "desc": "Dudas de tus decisiones"
+    }
+  },
+  {
+    "num": 34,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Inconsistente",
+      "desc": "Cambias de opinión"
+    },
+    "Colerico": {
+      "titulo": "Intolerante",
+      "desc": "No toleras fallos"
+    },
+    "Melancolico": {
+      "titulo": "Introvertido",
+      "desc": "Te encierras en ti"
+    },
+    "Flematico": {
+      "titulo": "Indiferente",
+      "desc": "Te muestras indiferente"
+    }
+  },
+  {
+    "num": 35,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Desordenado",
+      "desc": "Desordenas todo"
+    },
+    "Colerico": {
+      "titulo": "Manipulador",
+      "desc": "Manipulas situaciones"
+    },
+    "Melancolico": {
+      "titulo": "Desanimado",
+      "desc": "Te desanimas rápido"
+    },
+    "Flematico": {
+      "titulo": "Habla entre dientes",
+      "desc": "Hablas entre dientes"
+    }
+  },
+  {
+    "num": 36,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Ostentoso",
+      "desc": "Exageras para llamar la atención"
+    },
+    "Colerico": {
+      "titulo": "Testarudo",
+      "desc": "Eres testarudo extremo"
+    },
+    "Melancolico": {
+      "titulo": "Escéptico",
+      "desc": "Dudas de todo"
+    },
+    "Flematico": {
+      "titulo": "Lento",
+      "desc": "Actúas con lentitud"
+    }
+  },
+  {
+    "num": 37,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Ruidoso",
+      "desc": "Haces mucho ruido"
+    },
+    "Colerico": {
+      "titulo": "Prepotente",
+      "desc": "Actúas con prepotencia"
+    },
+    "Melancolico": {
+      "titulo": "Solitario",
+      "desc": "Prefieres la soledad"
+    },
+    "Flematico": {
+      "titulo": "Flojo",
+      "desc": "Te falta motivación"
+    }
+  },
+  {
+    "num": 38,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Precipitado",
+      "desc": "Actúas sin pensar"
+    },
+    "Colerico": {
+      "titulo": "Malgeniado",
+      "desc": "Te enojas con facilidad"
+    },
+    "Melancolico": {
+      "titulo": "Suspicaz",
+      "desc": "Desconfías de todos"
+    },
+    "Flematico": {
+      "titulo": "Perezoso",
+      "desc": "Eres perezoso a menudo"
+    }
+  },
+  {
+    "num": 39,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Inquieto",
+      "desc": "No te quedas quieto"
+    },
+    "Colerico": {
+      "titulo": "Precipitado",
+      "desc": "Te adelantas sin medir"
+    },
+    "Melancolico": {
+      "titulo": "Vengativo",
+      "desc": "Buscas venganza"
+    },
+    "Flematico": {
+      "titulo": "Poca vountad",
+      "desc": "Te falta voluntad"
+    }
+  },
+  {
+    "num": 40,
+    "tipo": "Debilidad",
+    "Sangineo": {
+      "titulo": "Variable",
+      "desc": "Eres cambiante e inestable"
+    },
+    "Colerico": {
+      "titulo": "Astuto",
+      "desc": "Eres astuto y calculador"
+    },
+    "Melancolico": {
+      "titulo": "Crítico",
+      "desc": "Criticas con dureza"
+    },
+    "Flematico": {
+      "titulo": "Genera riesgos",
+      "desc": "Generas riesgos innecesarios"
+    }
+  }
+]
