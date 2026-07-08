@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/test_temperaments",
+  ...(process.env.BASE_PATH ? { basePath: process.env.BASE_PATH } : {}),
   trailingSlash: true,
   images: {
     unoptimized: true,
