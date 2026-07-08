@@ -40,6 +40,7 @@ export interface NewTestState {
 
   setUserName: (name: string) => void
   selectAnswer: (num: number, temperament: Temperament) => void
+  prevQuestion: () => void
   resetTest: () => void
 }
 
@@ -71,7 +72,16 @@ export const useNewTestStore = create<NewTestState>((set, get) => ({
 
     const newAnswers = { ...answers, [num]: temperament }
     const newScores = { ...scores }
-    newScores[temperament]++
+
+    const previousAnswer = answers[num]
+    if (previousAnswer) {
+      if (previousAnswer !== temperament) {
+        newScores[previousAnswer] = Math.max(newScores[previousAnswer] - 1, 0)
+        newScores[temperament]++
+      }
+    } else {
+      newScores[temperament]++
+    }
 
     const nextQuestion = currentQuestion + 1
     const isLast = nextQuestion >= shuffledQuestions.length
@@ -83,6 +93,10 @@ export const useNewTestStore = create<NewTestState>((set, get) => ({
       step: isLast ? 'results' : 'testing'
     })
   },
+
+  prevQuestion: () => set((state) => ({
+    currentQuestion: Math.max(state.currentQuestion - 1, 0)
+  })),
 
   resetTest: () => set({
     step: 'form',

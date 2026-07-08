@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { toPng } from "html-to-image"
 import { useNewTestStore, Temperament, TemperamentOption } from "@/store/newTestStore"
 import { Button } from "@/components/ui/button"
@@ -46,6 +46,60 @@ const temperamentEmojis: Record<Temperament, string> = {
   Melancolico: "🎭",
   Flematico: "🌿"
 }
+
+const optionEmojis: Record<Temperament, Record<string, string>> = {
+  Sangineo: {
+    "Animado": "🎉", "Juguetón": "🧸", "Sociable": "🤝", "Convincente": "💬",
+    "Alentador": "👏", "Vivaz": "✨", "Promotor": "📢", "Espontáneo": "🎪",
+    "Optimista": "🌈", "Humorístico": "😂", "Encantador": "🌟", "Alegre": "☀️",
+    "Inspirador": "💡", "Cálido": "🤗", "Tratable": "😄", "Conversador": "🗣️",
+    "Enérgico": "⚡", "Adorable": "🥰", "Popular": "🎊", "Jovial": "🎵",
+    "Estridente": "📣", "Indisciplinado": "😤", "Repetidor": "🔄", "Olvidadizo": "😅",
+    "Interrumpe": "✋", "Imprevisible": "🎲", "Descuidado": "😬", "Permisivo": "🤷",
+    "Iracundo": "😠", "Ingenuo": "😇", "Quiere el crérdito": "🏆", "Hablador": "🗨️",
+    "Desorganizado": "📦", "Inconsistente": "🎭", "Desordenado": "📚", "Ostentoso": "💎",
+    "Ruidoso": "🔊", "Precipitado": "🏃", "Inquieto": "🌀", "Variable": "🌊"
+  },
+  Colerico: {
+    "Aventurero": "🗺️", "Persuasivo": "🎯", "Decidido": "💪", "Competitivo": "🏆",
+    "Inventivo": "💡", "Autosuficiente": "🦾", "Positivo": "👍", "Seguro": "🛡️",
+    "Franco": "📯", "Dominante": "👑", "Osado": "🦁", "Confiado": "😎",
+    "Independiente": "🦅", "Decisivo": "⚡", "Influenciador": "📡", "Persistente": "🎯",
+    "Líder": "🚀", "Jefe": "👔", "Productivo": "✅", "Atrevido": "🔥",
+    "Mandón": "📋", "Antipático": "🥶", "Resistente": "🪨", "Cortante": "🗡️",
+    "Impaciente": "⏰", "Frío": "🧊", "Terco": "🫏", "Orgulloso": "🦚",
+    "Argumentador": "⚖️", "Adicto al trabajo": "💼", "Indiscreto": "🤫",
+    "Intolerante": "🚫", "Manipulador": "🎪", "Testarudo": "🧱", "Prepotente": "👊",
+    "Malgeniado": "🤬", "Astuto": "🦊"
+  },
+  Melancolico: {
+    "Analítico": "🔍", "Persistente": "🎯", "Abnegado": "🙏", "Considerado": "💭",
+    "Respetuoso": "🎩", "Sensible": "🎨", "Planificador": "📋", "Sigue un horario": "⏰",
+    "Ordenado": "📐", "Fiel": "🤝", "Detallista": "🔎", "Culto": "📚",
+    "Idealista": "⭐", "Introspectivo": "🧘", "Sensible al arte": "🎭", "Leal": "🛡️",
+    "Crea gráficas": "📊", "Perfeccionista": "💎", "Se comparta bien": "🎀",
+    "Penoso": "😳", "Implacable": "⚔️", "Resentido": "😤", "Exigente": "📏",
+    "Inseguro": "😟", "Impopular": "😶", "Difícil contentar": "😒", "Pesimista": "🌧️",
+    "Callado": "🤐", "Negativo": "☁️", "Retraído": "🐌", "Susceptible": "😿",
+    "Deprimido": "😔", "Introvertido": "📖", "Desanimado": "😩", "Escéptico": "🤔",
+    "Solitario": "🧍", "Suspicaz": "👀", "Vengativo": "🗡️", "Crítico": "📝"
+  },
+  Flematico: {
+    "Adaptable": "🌊", "Sereno": "🧘", "Sumiso": "🕊️", "Controlado": "🎛️",
+    "Reservado": "🤫", "Tranquilo": "😌", "Paciente": "⏳", "Tímido": "🙈",
+    "Complaciente": "😊", "Amigable": "👋", "Diplomático": "🤝", "Constante": "⛰️",
+    "Inofensivo": "🐑", "Humor seco": "😏", "Conciliador": "☮️", "Tolerante": "🌈",
+    "Escucha": "👂", "Contento": "😊", "Equilibrado": "⚖️",
+    "Monótono": "🔁", "Sin entudiasmo": "😐", "Sarcástico": "😏", "Temeroso": "😨",
+    "Indeciso": "🤷", "No comprometido": "🚶", "Vacilante": "⏱️", "Insípido": "💧",
+    "Sin objetivos": "🎯", "Despreocupado": "🍃", "Ansioso": "😰", "Dudoso": "🤨",
+    "Indiferente": "🗿", "Habla entre dientes": "😶‍🌫️", "Lento": "🐢",
+    "Flojo": "🛋️", "Perezoso": "😴", "Poca vountad": "🌱", "Genera riesgos": "⚠️"
+  }
+}
+
+const getOptionEmoji = (temperament: Temperament, titulo: string): string =>
+  optionEmojis[temperament]?.[titulo] ?? temperamentEmojis[temperament]
 
 const temperamentTraits: Record<Temperament, { fortalezas: string[]; debilidades: string[]; parrafo: string }> = {
   Sangineo: {
@@ -158,45 +212,62 @@ function WelcomeForm() {
 }
 
 function QuestionView() {
-  const { currentQuestion, shuffledQuestions, selectAnswer, userName, answers } = useNewTestStore()
+  const { currentQuestion, shuffledQuestions, selectAnswer, prevQuestion, userName, answers } = useNewTestStore()
   const question = shuffledQuestions[currentQuestion]
   const totalQuestions = shuffledQuestions.length
   const progress = ((currentQuestion + 1) / totalQuestions) * 100
-  const selectedAnswer = answers[question.num]
+  const selectedAnswer = answers[question?.num]
   const [animKey, setAnimKey] = useState(0)
   const [exiting, setExiting] = useState(false)
 
-  const [shuffledOptions, setShuffledOptions] = useState<[Temperament, TemperamentOption][]>([])
+  const orderCache = useRef<Record<number, [Temperament, TemperamentOption][]>>({})
+
+  const shuffledOptions = useMemo(() => {
+    if (!orderCache.current[currentQuestion]) {
+      orderCache.current[currentQuestion] = shuffleArray([
+        ['Sangineo', question.Sangineo],
+        ['Colerico', question.Colerico],
+        ['Melancolico', question.Melancolico],
+        ['Flematico', question.Flematico]
+      ])
+    }
+    return orderCache.current[currentQuestion]
+  }, [currentQuestion])
 
   useEffect(() => {
     setAnimKey((k) => k + 1)
-    const entries: [Temperament, TemperamentOption][] = [
-      ['Sangineo', question.Sangineo],
-      ['Colerico', question.Colerico],
-      ['Melancolico', question.Melancolico],
-      ['Flematico', question.Flematico]
-    ]
-    setShuffledOptions(shuffleArray(entries))
-  }, [currentQuestion, question])
+  }, [currentQuestion])
 
   const handleSelect = useCallback((temperament: Temperament) => {
-    if (selectedAnswer) return
     setExiting(true)
     setTimeout(() => {
       selectAnswer(question.num, temperament)
       setExiting(false)
     }, 200)
-  }, [selectedAnswer, selectAnswer, question.num])
+  }, [selectAnswer, question.num])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50 p-3 sm:p-4">
       <div className="max-w-2xl mx-auto">
-        <div className="mb-6 animate-[fade-in_0.4s_ease-out]">
+        <div className="mb-4 sm:mb-6 animate-[fade-in_0.4s_ease-out]">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm font-medium text-gray-600 font-subtitulos">
               Pregunta {currentQuestion + 1} de {totalQuestions}
             </span>
-            <span className="text-sm text-gray-500 font-texto">{userName}</span>
+            <div className="flex items-center gap-3">
+              {currentQuestion > 0 && (
+                <button
+                  onClick={prevQuestion}
+                  className="text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-800 font-subtitulos flex items-center gap-1 transition-colors active:text-blue-900"
+                >
+                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Anterior
+                </button>
+              )}
+              <span className="text-xs sm:text-sm text-gray-500 font-texto">{userName}</span>
+            </div>
           </div>
           <div className="relative">
             <Progress value={progress} className="h-2 bg-gray-200 [&>div]:bg-gradient-to-r [&>div]:from-blue-400 [&>div]:to-cyan-400 [&>div]:transition-all [&>div]:duration-500 [&>div]:ease-out" />
@@ -209,41 +280,40 @@ function QuestionView() {
         >
           <Card className="shadow-2xl border-0 overflow-hidden">
             <div className="h-1.5 bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400" />
-            <CardHeader className="pb-2">
-              <p className="text-lg font-semibold text-blue-900 font-titulos">
+            <CardHeader className="pb-2 px-4 sm:px-6 pt-4 sm:pt-6">
+              <p className="text-sm sm:text-base md:text-lg font-semibold text-blue-900 font-titulos px-1 text-balance">
                 ¿Con cuál de los enunciados te sientes más identificado?
               </p>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-3">
+            <CardContent className="px-3 sm:px-6 pb-4 sm:pb-6">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 {shuffledOptions.map(([key, option], i) => {
                   const isSelected = selectedAnswer === key
                   return (
                     <button
                       key={key}
                       onClick={() => handleSelect(key)}
-                      disabled={!!selectedAnswer}
-                      className={`
-                        aspect-square p-4 rounded-2xl border-2 transition-all duration-300
-                        flex flex-col items-center justify-center text-center relative overflow-hidden
-                        ${isSelected
-                          ? 'border-transparent shadow-xl scale-[1.03] bg-gradient-to-br from-blue-500 to-cyan-400 text-white'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-lg hover:-translate-y-1'
-                        }
-                        ${selectedAnswer ? 'cursor-default' : 'cursor-pointer active:scale-[0.95]'}
-                        animate-[card-in_0.4s_ease-out]
-                      `}
-                      style={{ animationDelay: `${i * 80}ms`, animationFillMode: 'backwards' }}
-                    >
-                      {isSelected && (
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 animate-[pulse-glow_2s_ease-in-out_infinite]" />
-                      )}
-                      <p className={`font-texto text-sm leading-tight relative z-10 ${isSelected ? 'text-white' : 'text-gray-700'}`}>
-                        {temperamentEmojis[key]} {option.titulo}
-                      </p>
-                      <p className={`text-[10px] mt-1 leading-tight relative z-10 ${isSelected ? 'text-white/80' : 'text-gray-400'}`}>
-                        {option.desc}
-                      </p>
+                        className={`
+                          aspect-square p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 transition-all duration-300
+                          flex flex-col items-center justify-center text-center relative overflow-hidden
+                          ${isSelected
+                            ? 'border-transparent shadow-xl scale-[1.03] bg-gradient-to-br from-blue-500 to-cyan-400 text-white'
+                            : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-lg hover:-translate-y-1'
+                          }
+                          cursor-pointer active:scale-[0.95]
+                          animate-[card-in_0.4s_ease-out]
+                        `}
+                        style={{ animationDelay: `${i * 80}ms`, animationFillMode: 'backwards' }}
+                      >
+                        {isSelected && (
+                          <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 animate-[pulse-glow_2s_ease-in-out_infinite]" />
+                        )}
+                        <p className={`font-texto text-[11px] sm:text-sm leading-tight relative z-10 ${isSelected ? 'text-white' : 'text-gray-700'}`}>
+                          {getOptionEmoji(key, option.titulo)} {option.titulo}
+                        </p>
+                        <p className={`text-[9px] sm:text-[10px] mt-1 leading-tight relative z-10 ${isSelected ? 'text-white/80' : 'text-gray-400'}`}>
+                          {option.desc}
+                        </p>
                       <div className={`
                         absolute bottom-0 left-0 right-0 h-1 transition-all duration-500 ease-out rounded-full
                         ${isSelected ? 'bg-white/50' : 'bg-transparent'}
@@ -335,8 +405,8 @@ function ResultsView() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50 p-4">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50 p-3 sm:p-4">
+      <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
         <div ref={resultsRef} className="space-y-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50 p-4 rounded-2xl">
         <div className="animate-[fade-in_0.6s_ease-out]">
           <Card className="shadow-2xl border-0 overflow-hidden">
@@ -346,10 +416,10 @@ function ResultsView() {
                 <span className="text-4xl">🎯</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent font-titulos">
+                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent font-titulos">
                   ¡Resultados de {userName}!
                 </h1>
-                <p className="text-lg text-gray-500 font-subtitulos mt-2">
+                <p className="text-sm sm:text-lg text-gray-500 font-subtitulos mt-2">
                   Tu temperamento predominante es{' '}
                   <span className="font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
                     {primary.name} — {secondary.name}
@@ -364,10 +434,10 @@ function ResultsView() {
           <Card className="shadow-2xl border-0 overflow-hidden">
             <div className="h-1.5 bg-gradient-to-r from-purple-400 to-pink-400" />
             <CardHeader>
-              <h2 className="flex items-center gap-2 font-titulos text-xl">
-                <Sparkles className="w-5 h-5 text-yellow-500" />
+              <h2 className="flex items-center gap-2 font-titulos text-base sm:text-xl">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
                 <span className="bg-gradient-to-r from-purple-700 to-pink-600 bg-clip-text text-transparent">
-                  Fortalezas y Debilidades — Basado en Tim LaHaye
+                  Fortalezas y Debilidades
                 </span>
               </h2>
             </CardHeader>
@@ -417,12 +487,12 @@ function ResultsView() {
           <Card className="shadow-2xl border-0 overflow-hidden">
             <div className="h-1.5 bg-gradient-to-r from-blue-400 to-cyan-400" />
             <CardHeader>
-              <h2 className="text-xl font-titulos bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
+              <h2 className="text-base sm:text-xl font-titulos bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
                 Porcentajes por Temperamento
               </h2>
             </CardHeader>
             <CardContent>
-              <div className="h-[300px]">
+              <div className="h-[250px] sm:h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 30, left: 80, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#e5e7eb" />
@@ -448,8 +518,8 @@ function ResultsView() {
           <Card className="shadow-2xl border-0 overflow-hidden">
             <div className="h-1.5 bg-gradient-to-r from-emerald-400 to-teal-400" />
             <CardHeader>
-              <h2 className="flex items-center gap-2 font-titulos text-xl">
-                <Sparkles className="w-5 h-5 text-yellow-500" />
+              <h2 className="flex items-center gap-2 font-titulos text-base sm:text-xl">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
                 <span className="bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
                   Tu Perfil: {profile.title}
                 </span>
@@ -457,11 +527,11 @@ function ResultsView() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-700 leading-relaxed font-texto">{profile.description}</p>
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-4 grid grid-cols-2 gap-2 sm:gap-3">
                 {chartData.map((item, i) => (
                   <div
                     key={item.name}
-                    className="flex items-center justify-between p-3 rounded-xl transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+                    className="flex items-center justify-between p-2 sm:p-3 rounded-xl transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
                     style={{
                       background: `linear-gradient(135deg, ${item.fill}15, ${item.fill}08)`,
                       animation: `fade-in 0.4s ease-out ${0.5 + i * 0.1}s both`
@@ -480,11 +550,11 @@ function ResultsView() {
 
       </div>
 
-        <div className="flex gap-4 pb-8 animate-[fade-in_0.6s_ease-out_0.6s_both]">
+        <div className="flex gap-2 sm:gap-4 pb-8 animate-[fade-in_0.6s_ease-out_0.6s_both]">
           <Button
             onClick={handleShare}
             disabled={capturing}
-            className="flex-1 py-6 font-subtitulos bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60"
+            className="flex-1 py-4 sm:py-6 font-subtitulos bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60 text-sm sm:text-base"
           >
             <Share2 className="w-4 h-4 mr-2" />
             {capturing ? "Generando..." : "Compartir"}
@@ -492,7 +562,7 @@ function ResultsView() {
           <Button
             onClick={resetTest}
             variant="outline"
-            className="flex-1 py-6 font-subtitulos border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
+            className="flex-1 py-4 sm:py-6 font-subtitulos border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98] text-sm sm:text-base"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
             Repetir Test
