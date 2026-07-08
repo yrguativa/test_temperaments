@@ -286,7 +286,7 @@ function QuestionView() {
               </p>
             </CardHeader>
             <CardContent className="px-3 sm:px-6 pb-4 sm:pb-6">
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {shuffledOptions.map(([key, option], i) => {
                   const isSelected = selectedAnswer === key
                   return (
@@ -294,7 +294,7 @@ function QuestionView() {
                       key={key}
                       onClick={() => handleSelect(key)}
                         className={`
-                          aspect-square p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 transition-all duration-300
+                          min-h-[88px] sm:aspect-square p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 transition-all duration-300
                           flex flex-col items-center justify-center text-center relative overflow-hidden
                           ${isSelected
                             ? 'border-transparent shadow-xl scale-[1.03] bg-gradient-to-br from-blue-500 to-cyan-400 text-white'
@@ -308,10 +308,10 @@ function QuestionView() {
                         {isSelected && (
                           <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 animate-[pulse-glow_2s_ease-in-out_infinite]" />
                         )}
-                        <p className={`font-texto text-[11px] sm:text-sm leading-tight relative z-10 ${isSelected ? 'text-white' : 'text-gray-700'}`}>
+                        <p className={`font-texto text-sm sm:text-base leading-tight relative z-10 ${isSelected ? 'text-white' : 'text-gray-700'}`}>
                           {getOptionEmoji(key, option.titulo)} {option.titulo}
                         </p>
-                        <p className={`text-[9px] sm:text-[10px] mt-1 leading-tight relative z-10 ${isSelected ? 'text-white/80' : 'text-gray-400'}`}>
+                        <p className={`text-[11px] sm:text-xs mt-1 leading-tight relative z-10 ${isSelected ? 'text-white/80' : 'text-gray-400'}`}>
                           {option.desc}
                         </p>
                       <div className={`
