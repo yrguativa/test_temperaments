@@ -20,9 +20,15 @@ const openSans = Open_Sans({
   weight: ["300", "400", "500", "600"],
 });
 
+const emojiSvg = (emoji: string) =>
+  `data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>${emoji}</text></svg>`)}`
+
 export const metadata: Metadata = {
   title: "Test de Temperamentos",
   description: "Descubre tu temperamento dominante",
+  icons: {
+    icon: emojiSvg("🧪"),
+  },
 };
 
 export default function RootLayout({
